@@ -1,0 +1,26 @@
+syntax = "proto3";
+package cosmos.crypto.solana;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+
+option go_package = "github.com/cosmos/cosmos-sdk/crypto/keys/solana";
+
+// PubKey is an ed25519 public key for user accounts with Solana-style
+// addresses: the address is the raw 32-byte public key.
+// Not for consensus keys, use crypto/keys/ed25519 for those.
+message PubKey {
+  option (amino.name)                 = "solana/PubKey";
+  option (amino.message_encoding)     = "key_field";
+  option (gogoproto.goproto_stringer) = false;
+
+  bytes key = 1;
+}
+
+// PrivKey defines a Solana-style ed25519 private key (64 bytes: seed + public key).
+message PrivKey {
+  option (amino.name)             = "solana/PrivKey";
+  option (amino.message_encoding) = "key_field";
+
+  bytes key = 1;
+}
